@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expedite Precision Works, Inc. — Precision CNC Machining Since 1994</title>
+<meta name="description" content="Family-owned precision CNC machine shop in San Jose, CA since 1994. Prototype to high-volume close-tolerance metal and plastic parts for aerospace, medical, defense, semiconductor, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "Organization"],
+  "name": "Expedite Precision Works, Inc.",
+  "url": "https://expediteprecision.com",
+  "logo": "images/logo.webp",
+  "image": "images/hero-photo.jpg",
+  "description": "Family-owned precision CNC machine shop since 1994. Prototype to high-volume close-tolerance metal and plastic parts for mission-critical industries worldwide.",
+  "foundingDate": "1994",
+  "founder": { "@type": "Person", "name": "Orlando Teixeira" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "931 Berryessa Road",
+    "addressLocality": "San Jose",
+    "addressRegion": "CA",
+    "postalCode": "95133",
+    "addressCountry": "US"
+  },
+  "telephone": "+14085739600",
+  "email": "info@expediteprecision.com",
+  "sameAs": [
+    "https://www.facebook.com/expediteprecision",
+    "https://www.linkedin.com/company/expedite-precision-works"
+  ]
+}
+</script>
+<style>
+/* ============================================================
+   CUSTOM PROPERTIES
+============================================================ */
+:root {
+  --bg:          #0C0E11;
+  --bg-2:        #13171E;
+  --bg-3:        #181D26;
+  --line-dim:    #191E27;
+  --line:        #222838;
+  --line-hi:     #2C3545;
+  --txt:         #E8EAEE;
+  --txt-2:       #8B94A8;
+  --txt-3:       #4E5668;
+  --accent:      #0A84FF;
+  --accent-2:    rgba(10,132,255,.18);
+  --accent-3:    rgba(10,132,255,.07);
+  --white:       #fff;
+  --hh:          68px;
+  --sp:          clamp(80px,10vw,140px);
+  --gx:          clamp(20px,4vw,48px);
+  --mw:          1320px;
+  --fd:          'Barlow Condensed', sans-serif;
+  --fb:          'Inter', sans-serif;
+  --fm:          'JetBrains Mono', monospace;
+}
+
+/* ============================================================
+   RESET
+============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+ul{list-style:none}
+
+/* ============================================================
+   UTILITIES
+============================================================ */
+.wrap{max-width:var(--mw);margin:0 auto;padding:0 var(--gx)}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--accent);flex-shrink:0}
+
+.section-title{font-family:var(--fd);font-weight:800;font-size:clamp(40px,5.5vw,72px);line-height:.93;letter-spacing:-.015em;text-transform:uppercase;color:var(--white)}
+
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;height:48px;padding:0 26px;border:none;outline:none;transition:all .2s;white-space:nowrap}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.btn-primary{background:var(--accent);color:#fff;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)}
+.btn-primary:hover{background:#2691ff;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--txt);border:1px solid var(--line-hi)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================================
+   SCROLL PROGRESS
+============================================================ */
+#prog-track{position:fixed;top:var(--hh);left:0;right:0;height:2px;background:var(--line-dim);z-index:200;pointer-events:none}
+#prog-fill{height:100%;background:var(--accent);width:0%;box-shadow:0 0 8px rgba(10,132,255,.45);transition:width .08s linear}
+
+/* ============================================================
+   HEADER
+============================================================ */
+#hdr{position:fixed;top:0;left:0;right:0;height:var(--hh);background:rgba(12,14,17,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line-dim);z-index:100;transition:border-color .3s,background .3s}
+#hdr.scrolled{background:rgba(12,14,17,.97);border-bottom-color:var(--line)}
+.hdr-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.hdr-logo{flex-shrink:0;height:34px;display:flex;align-items:center}
+.hdr-logo img{height:100%;width:auto;object-fit:contain}
+.hdr-nav{display:flex;align-items:center;gap:0}
+.hdr-nav a{display:block;padding:8px 13px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-2);position:relative;transition:color .2s}
+.hdr-nav a::after{content:'';position:absolute;left:13px;right:13px;bottom:4px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.hdr-nav a:hover{color:var(--white)}
+.hdr-nav a:hover::after{transform:scaleX(1)}
+.hdr-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.hdr-phone{font-family:var(--fm);font-size:12px;color:var(--txt-2);letter-spacing:.06em;transition:color .2s}
+.hdr-phone:hover{color:var(--white)}
+.nav-tog{display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;width:40px;height:40px;background:transparent;border:1px solid var(--line-hi)}
+.nav-tog span{display:block;width:18px;height:1.5px;background:var(--txt);transition:transform .22s,opacity .22s}
+.nav-tog[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-tog[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-tog[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ============================================================
+   HERO
+============================================================ */
+#hero{position:relative;min-height:100svh;display:flex;flex-direction:column;padding-top:var(--hh);overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.22) saturate(.5)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(108deg,rgba(12,14,17,.95) 0%,rgba(12,14,17,.55) 50%,transparent 100%),linear-gradient(to top,rgba(12,14,17,1) 0%,transparent 45%)}
+.hero-grid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(10,132,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(10,132,255,.035) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 75% 80% at 30% 50%,black 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 75% 80% at 30% 50%,black 20%,transparent 75%)}
+.hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:center}
+.hero-content{padding:60px 0 clamp(120px,16vw,180px)}
+.hero-eyebrow{margin-bottom:30px}
+.hero-h1{font-family:var(--fd);font-weight:900;font-size:clamp(58px,9vw,124px);line-height:.91;letter-spacing:-.025em;text-transform:uppercase;color:var(--white);margin-bottom:30px}
+.hero-h1 em{font-style:normal;color:var(--accent);display:block}
+.hero-sub{font-size:clamp(15px,1.55vw,18px);color:var(--txt-2);max-width:500px;line-height:1.72;margin-bottom:40px}
+.hero-acts{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hero-statbar{position:absolute;bottom:0;left:0;right:0;z-index:2;border-top:1px solid var(--line);background:rgba(12,14,17,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr)}
+.h-stat{padding:clamp(18px,2.5vw,30px) clamp(18px,3vw,40px);border-right:1px solid var(--line)}
+.h-stat:last-child{border-right:none}
+.h-stat-n{font-family:var(--fd);font-weight:800;font-size:clamp(28px,4vw,52px);line-height:1;color:var(--white);letter-spacing:-.02em}
+.h-stat-n span{color:var(--accent)}
+.h-stat-l{font-family:var(--fm);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-3);margin-top:4px}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+#about{padding:var(--sp) 0;background:var(--bg-2);position:relative;overflow:hidden}
+.about-wm{position:absolute;right:-.02em;top:50%;transform:translateY(-50%);font-family:var(--fd);font-weight:900;font-size:clamp(160px,20vw,300px);line-height:1;color:transparent;-webkit-text-stroke:1px var(--line-hi);letter-spacing:-.05em;text-transform:uppercase;pointer-events:none;user-select:none}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:center;position:relative;z-index:1}
+.about-vis{position:relative;padding:22px 0 0 22px}
+.about-frame{position:absolute;top:0;left:0;right:22px;bottom:22px;border:1px solid var(--line-hi);pointer-events:none}
+.afc{position:absolute;width:14px;height:14px;border-color:var(--accent);border-style:solid}
+.afc.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.afc.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
+.afc.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
+.afc.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.about-img{width:100%;height:clamp(340px,44vw,560px);object-fit:cover;position:relative;z-index:1}
+.about-tag{position:absolute;bottom:22px;right:0;z-index:2;background:var(--accent);padding:9px 16px;font-family:var(--fm);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+.about-txt .eyebrow{margin-bottom:18px}
+.about-txt .section-title{margin-bottom:24px}
+.about-p{font-size:15px;color:var(--txt-2);line-height:1.76;margin-bottom:14px}
+.about-p strong{color:var(--txt);font-weight:600}
+.specs{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line-hi)}
+.spec{padding:18px 22px;border-bottom:1px solid var(--line-hi);border-right:1px solid var(--line-hi);transition:background .18s}
+.spec:nth-child(even){border-right:none}
+.spec:nth-last-child(-n+2){border-bottom:none}
+.spec:hover{background:var(--accent-3)}
+.spec-v{font-family:var(--fd);font-weight:800;font-size:clamp(22px,2.5vw,30px);line-height:1;color:var(--accent);margin-bottom:3px}
+.spec-k{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3)}
+
+/* ============================================================
+   CAPABILITIES
+============================================================ */
+#cap{padding:var(--sp) 0;background:var(--bg);border-top:1px solid var(--line-dim)}
+.cap-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(44px,6vw,76px);flex-wrap:wrap}
+.cap-hdr-l .eyebrow{margin-bottom:14px}
+.cap-intro{font-size:14px;color:var(--txt-2);max-width:380px;line-height:1.7}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.cap-card{background:var(--bg-2);padding:34px 30px;position:relative;overflow:hidden;transition:background .2s}
+.cap-card:hover{background:var(--bg-3)}
+.cap-n{position:absolute;top:22px;right:26px;font-family:var(--fm);font-size:10px;letter-spacing:.14em;color:var(--txt-3)}
+.cap-ico{width:42px;height:42px;border:1px solid var(--line-hi);display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--accent);transition:border-color .2s,background .2s}
+.cap-card:hover .cap-ico{border-color:var(--accent);background:var(--accent-3)}
+.cap-ico svg{width:19px;height:19px}
+.cap-ttl{font-family:var(--fd);font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.03em;color:var(--white);margin-bottom:10px}
+.cap-dsc{font-size:13px;color:var(--txt-3);line-height:1.65}
+.cap-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.cap-card:hover .cap-bar{transform:scaleX(1)}
+
+/* ============================================================
+   INDUSTRIES
+============================================================ */
+#ind{padding:var(--sp) 0;background:var(--bg-2);border-top:1px solid var(--line-dim)}
+.ind-hdr{margin-bottom:clamp(44px,6vw,76px)}
+.ind-hdr .eyebrow{margin-bottom:14px}
+.ind-hdr .section-title{margin-bottom:14px}
+.ind-sub{font-size:14px;color:var(--txt-2);max-width:480px;line-height:1.7}
+.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.ind-card{position:relative;aspect-ratio:4/5;overflow:hidden}
+.ind-card img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94),filter .4s;filter:brightness(.48) saturate(.6)}
+.ind-card:hover img{transform:scale(1.07);filter:brightness(.65) saturate(.85)}
+.ind-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,14,17,.92) 0%,transparent 52%)}
+.ind-lbl{position:absolute;bottom:0;left:0;right:0;padding:20px 18px}
+.ind-name{font-family:var(--fd);font-weight:700;font-size:clamp(12px,1.35vw,15px);text-transform:uppercase;letter-spacing:.05em;color:#fff;display:block;line-height:1.2}
+.ind-bar{display:block;width:18px;height:2px;background:var(--accent);margin-top:9px;transition:width .3s ease}
+.ind-card:hover .ind-bar{width:36px}
+
+/* ============================================================
+   QUALITY
+============================================================ */
+#qual{padding:var(--sp) 0;background:var(--bg);border-top:1px solid var(--line-dim)}
+.qual-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:start}
+.qual-content .eyebrow{margin-bottom:18px}
+.qual-content .section-title{margin-bottom:20px}
+.qual-lead{font-size:15px;color:var(--txt-2);line-height:1.76;margin-bottom:40px}
+.qual-list{border:1px solid var(--line-hi)}
+.qual-item{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line-hi);transition:background .18s}
+.qual-item:last-child{border-bottom:none}
+.qual-item:hover{background:var(--accent-3)}
+.qual-dot{width:5px;height:5px;background:var(--accent);flex-shrink:0}
+.qual-txt{font-size:14px;font-weight:500;color:var(--txt)}
+.qual-vis{position:sticky;top:calc(var(--hh) + 24px)}
+.qual-img-wrap{position:relative}
+.qual-img-wrap img{width:100%;height:clamp(400px,50vw,600px);object-fit:cover}
+.qual-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 44%)}
+.qual-badge{position:absolute;bottom:0;left:0;right:0;z-index:1;padding:28px 30px;display:flex;align-items:flex-end;justify-content:space-between}
+.qual-badge-h{font-family:var(--fd);font-weight:800;font-size:28px;text-transform:uppercase;line-height:1.1;color:#fff}
+.qual-badge-h span{display:block;font-family:var(--fm);font-size:9px;font-weight:400;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:7px}
+.qual-cmm{border:1px solid rgba(255,255,255,.14);padding:9px 13px;font-family:var(--fm);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.38);text-align:center;line-height:1.7}
+
+/* ============================================================
+   TESTIMONIALS
+============================================================ */
+#testi{padding:var(--sp) 0;background:var(--bg-2);border-top:1px solid var(--line-dim)}
+.testi-hdr{margin-bottom:clamp(44px,6vw,76px)}
+.testi-hdr .eyebrow{margin-bottom:14px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.testi-card{background:var(--bg);padding:38px 34px;display:flex;flex-direction:column}
+.testi-q{font-family:var(--fd);font-size:84px;font-weight:900;line-height:.65;color:var(--accent);opacity:.22;margin-bottom:18px;display:block;user-select:none}
+.testi-txt{font-size:14px;color:var(--txt-2);line-height:1.78;flex:1;margin-bottom:28px}
+.testi-auth{border-top:1px solid var(--line);padding-top:18px}
+.testi-role{font-family:var(--fm);font-size:10px;letter-spacing:.11em;color:var(--txt-3);text-transform:uppercase;line-height:1.6;font-style:normal}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+#contact{padding:var(--sp) 0;background:var(--bg);border-top:1px solid var(--line-dim)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:start}
+.contact-l .eyebrow{margin-bottom:18px}
+.contact-l .section-title{margin-bottom:20px}
+.contact-lead{font-size:15px;color:var(--txt-2);line-height:1.76;margin-bottom:36px}
+.contact-deets{border:1px solid var(--line-hi)}
+.cd{display:flex;gap:14px;align-items:flex-start;padding:18px 22px;border-bottom:1px solid var(--line-hi)}
+.cd:last-child{border-bottom:none}
+.cd-ico{width:34px;height:34px;border:1px solid var(--line-hi);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+.cd-ico svg{width:15px;height:15px}
+.cd-lbl{font-family:var(--fm);font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:var(--txt-3);margin-bottom:3px}
+.cd-val{font-size:14px;font-weight:500;color:var(--txt);line-height:1.5}
+.cd-val a:hover{color:var(--accent)}
+.socials{display:flex;gap:9px;margin-top:24px}
+.soc{width:38px;height:38px;border:1px solid var(--line-hi);display:flex;align-items:center;justify-content:center;color:var(--txt-2);transition:border-color .2s,color .2s,background .2s}
+.soc:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-3)}
+.soc svg{width:16px;height:16px}
+.qform{background:var(--bg-3);border:1px solid var(--line-hi);padding:clamp(24px,4vw,42px)}
+.form-h{font-family:var(--fd);font-weight:800;font-size:21px;text-transform:uppercase;letter-spacing:.03em;color:var(--white);margin-bottom:5px}
+.form-s{font-family:var(--fm);font-size:10px;letter-spacing:.1em;color:var(--txt-3);margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fg{margin-bottom:14px}
+.fl{display:block;font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt-3);margin-bottom:6px}
+.fi,.fs,.fta{width:100%;background:var(--bg);border:1px solid var(--line-hi);color:var(--txt);font-family:var(--fb);font-size:14px;padding:11px 13px;outline:none;transition:border-color .2s,background .2s;appearance:none;-webkit-appearance:none;border-radius:0}
+.fi:focus,.fs:focus,.fta:focus{border-color:var(--accent);background:rgba(10,132,255,.03)}
+.fi::placeholder,.fta::placeholder{color:var(--txt-3)}
+.fta{resize:vertical;min-height:96px;line-height:1.6}
+.sel-wrap{position:relative}
+.sel-wrap::after{content:'';position:absolute;right:13px;top:50%;transform:translateY(-50%);border:4px solid transparent;border-top:5px solid var(--txt-3);pointer-events:none}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+#ftr{background:var(--bg-2);border-top:1px solid var(--line-hi);padding:60px 0 28px}
+.ftr-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:clamp(28px,6vw,76px);margin-bottom:48px}
+.ftr-logo{height:32px;margin-bottom:16px}
+.ftr-logo img{height:100%;width:auto}
+.ftr-tag{font-size:13px;color:var(--txt-3);line-height:1.7;max-width:250px;margin-bottom:18px}
+.ftr-since{font-family:var(--fm);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--txt-3);display:flex;align-items:center;gap:8px}
+.ftr-since::before{content:'';display:block;width:14px;height:1px;background:var(--accent)}
+.ftr-col-ttl{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.ftr-links{display:flex;flex-direction:column;gap:9px}
+.ftr-links a{font-size:13px;color:var(--txt-3);transition:color .2s}
+.ftr-links a:hover{color:var(--txt)}
+.ftr-cl{font-size:13px;color:var(--txt-3);margin-bottom:9px;line-height:1.5}
+.ftr-cl a:hover{color:var(--accent)}
+.ftr-bot{border-top:1px solid var(--line-dim);padding-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.ftr-copy{font-family:var(--fm);font-size:11px;color:var(--txt-3);letter-spacing:.05em}
+.ftr-bot-links{display:flex;gap:18px}
+.ftr-bot-links a{font-family:var(--fm);font-size:11px;color:var(--txt-3);letter-spacing:.05em;transition:color .2s}
+.ftr-bot-links a:hover{color:var(--txt)}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media(max-width:1024px){
+  .cap-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+  .qual-grid{grid-template-columns:1fr}
+  .qual-vis{position:static}
+  .contact-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .ind-grid{grid-template-columns:repeat(2,1fr)}
+  .ftr-grid{grid-template-columns:1fr 1fr}
+  .about-tag{right:0}
+}
+@media(max-width:768px){
+  .cap-grid{grid-template-columns:1fr}
+  .cap-hdr{flex-direction:column;align-items:flex-start}
+  .hdr-phone{display:none}
+}
+@media(max-width:600px){
+  .hero-stats{grid-template-columns:1fr}
+  .h-stat{border-right:none;border-bottom:1px solid var(--line)}
+  .h-stat:last-child{border-bottom:none}
+  .ftr-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .about-frame{display:none}
+  .about-vis{padding:0}
+  .about-tag{right:0;bottom:0}
+  .form-row{grid-template-columns:1fr}
+  .nav-tog{display:flex}
+  .hdr-nav{display:none;position:fixed;top:var(--hh);left:0;right:0;background:var(--bg-2);border-bottom:1px solid var(--line-hi);flex-direction:column;padding:12px 0}
+  .hdr-nav.open{display:flex}
+  .hdr-nav a{padding:13px var(--gx);font-size:13px}
+  .hdr-nav a::after{display:none}
+}
+@media(min-width:481px) and (max-width:900px){
+  .nav-tog{display:flex}
+  .hdr-nav{display:none;position:fixed;top:var(--hh);left:0;right:0;background:var(--bg-2);border-bottom:1px solid var(--line-hi);flex-direction:column;padding:12px 0}
+  .hdr-nav.open{display:flex}
+  .hdr-nav a{padding:13px var(--gx);font-size:13px}
+  .hdr-nav a::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="prog-track" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+  <div id="prog-fill"></div>
+</div>
+
+<!-- ════════ HEADER ════════ -->
+<header id="hdr" role="banner">
+  <div class="wrap">
+    <div class="hdr-inner">
+      <a href="#hero" class="hdr-logo" aria-label="Expedite Precision Works — home">
+        <img src="images/logo.webp" alt="Expedite Precision Works" width="160" height="34">
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="hdr-nav" id="hdrNav">
+          <li><a href="#cap">Capabilities</a></li>
+          <li><a href="#qual">Quality</a></li>
+          <li><a href="#ind">Industries</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="hdr-right">
+        <a href="tel:+14085739600" class="hdr-phone" aria-label="Call (408) 573-9600">(408) 573-9600</a>
+        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+        <button class="nav-tog" id="navTog" aria-expanded="false" aria-controls="hdrNav" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ════════ HERO ════════ -->
+<section id="hero" aria-labelledby="hero-h1">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="images/hero-photo.jpg" alt="" loading="eager" fetchpriority="high">
+  </div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-body">
+    <div class="wrap">
+      <div class="hero-content">
+        <div class="hero-eyebrow"><span class="eyebrow">San Jose, CA — Est. 1994</span></div>
+        <h1 class="hero-h1" id="hero-h1">
+          Precision<br>
+          <em>Engineered</em>
+          To Spec
+        </h1>
+        <p class="hero-sub">Thirty years of close-tolerance CNC machining for the most demanding industries on earth. Prototype to high-volume. Metal and plastic. On time, every time.</p>
+        <div class="hero-acts">
+          <a href="#contact" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Request a Quote
+          </a>
+          <a href="tel:+14085739600" class="btn btn-outline">(408) 573-9600</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-statbar" aria-label="Company at a glance">
+    <div class="wrap">
+      <div class="hero-stats">
+        <div class="h-stat">
+          <div class="h-stat-n">30<span>+</span></div>
+          <div class="h-stat-l">Years in Operation</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-n">8</div>
+          <div class="h-stat-l">Industries Served</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-n">&lt;0.001<span>"</span></div>
+          <div class="h-stat-l">Tight Tolerances</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ABOUT ════════ -->
+<section id="about" aria-labelledby="about-h2">
+  <div class="about-wm" aria-hidden="true">EPW</div>
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-vis reveal">
+        <div class="about-frame" aria-hidden="true">
+          <span class="afc tl"></span>
+          <span class="afc tr"></span>
+          <span class="afc bl"></span>
+          <span class="afc br"></span>
+        </div>
+        <img class="about-img" src="images/about.jpeg" alt="Expedite Precision Works shop floor — state-of-the-art CNC machining facility in San Jose, CA" loading="lazy">
+        <div class="about-tag" aria-hidden="true">San Jose, CA 95133</div>
+      </div>
+      <div class="about-txt reveal">
+        <span class="eyebrow">About the Company</span>
+        <h2 class="section-title" id="about-h2" style="margin-top:18px">Family-Owned.<br>Mission-Focused.</h2>
+        <p class="about-p" style="margin-top:26px">Founded in <strong>1994</strong> by <strong>Orlando Teixeira</strong>, Expedite Precision Works is a family-owned CNC machine shop that has earned the confidence of engineers across the world's most demanding industries over three decades.</p>
+        <p class="about-p">We manufacture prototype, low-volume, and high-volume close-tolerance parts in both metal and plastic — bringing state-of-the-art solutions to every job, from one-off development parts to sustained production runs requiring absolute consistency.</p>
+        <p class="about-p">Our reputation rests on a single principle: <strong>if it can be machined, we find a way to make it right, on time.</strong></p>
+        <div class="specs">
+          <div class="spec"><div class="spec-v">1994</div><div class="spec-k">Founded</div></div>
+          <div class="spec"><div class="spec-v">30+</div><div class="spec-k">Years Experience</div></div>
+          <div class="spec"><div class="spec-v">CNC</div><div class="spec-k">Machining</div></div>
+          <div class="spec"><div class="spec-v">Proto→HV</div><div class="spec-k">Volume Range</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CAPABILITIES ════════ -->
+<section id="cap" aria-labelledby="cap-h2">
+  <div class="wrap">
+    <div class="cap-hdr">
+      <div class="cap-hdr-l reveal">
+        <span class="eyebrow">What We Do</span>
+        <h2 class="section-title" id="cap-h2" style="margin-top:14px">Core<br>Capabilities</h2>
+      </div>
+      <div class="reveal">
+        <p class="cap-intro">State-of-the-art CNC machining across the full production spectrum — first-article prototypes through sustained high-volume runs, in virtually any machinable metal or engineering plastic.</p>
+        <a href="#contact" class="btn btn-outline" style="margin-top:18px">Get a Quote</a>
+      </div>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card reveal">
+        <span class="cap-n">01</span>
+        <div class="cap-ico" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="9.5" cy="9.5" r="6.5"/><line x1="9.5" y1="3" x2="9.5" y2="16"/><line x1="3" y1="9.5" x2="16" y2="9.5"/></svg>
+        </div>
+        <div class="cap-ttl">CNC Milling</div>
+        <p class="cap-dsc">Multi-axis milling of complex geometries in aluminum, stainless, titanium, and engineering plastics. High-tolerance surface finishes on every run.</p>
+        <div class="cap-bar"></div>
+      </div>
+      <div class="cap-card reveal">
+        <span class="cap-n">02</span>
+        <div class="cap-ico" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2v15"/><ellipse cx="9.5" cy="9.5" rx="5" ry="2"/><path d="M5.5 5.5l8 8M13.5 5.5l-8 8"/></svg>
+        </div>
+        <div class="cap-ttl">CNC Turning</div>
+        <p class="cap-dsc">Precision turning to tight diametral tolerances. Live tooling for compound features in a single setup — fewer operations, better accuracy.</p>
+        <div class="cap-bar"></div>
+      </div>
+      <div class="cap-card reveal">
+        <span class="cap-n">03</span>
+        <div class="cap-ico" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="13" height="12" rx="1"/><path d="M7 8h5M7 11h3"/><path d="M11.5 2v3"/></svg>
+        </div>
+        <div class="cap-ttl">Prototyping</div>
+        <p class="cap-dsc">First-article and development prototypes with full dimensional reports. Fast turnaround for design-iteration cycles on demanding programs.</p>
+        <div class="cap-bar"></div>
+      </div>
+      <div class="cap-card reveal">
+        <span class="cap-n">04</span>
+        <div class="cap-ico" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16.5l14-14M8 2.5H2.5v5.5M16.5 11v5.5H11"/></svg>
+        </div>
+        <div class="cap-ttl">High-Volume Production</div>
+        <p class="cap-dsc">Sustained production runs with full process controls and traceability. Consistent quality across large batches for certified, mission-critical supply chains.</p>
+        <div class="cap-bar"></div>
+      </div>
+      <div class="cap-card reveal">
+        <span class="cap-n">05</span>
+        <div class="cap-ico" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="9.5" cy="9.5" r="2.5"/><path d="M9.5 1v3M9.5 15v3M1 9.5h3M15 9.5h3M3.4 3.4l2 2M13.6 13.6l2 2M13.6 5.4l2-2M3.4 15.6l2-2"/></svg>
+        </div>
+        <div class="cap-ttl">Close-Tolerance Work</div>
+        <p class="cap-dsc">Specialty in challenging, close-tolerance components other shops decline. Proven on aerospace, medical, and semiconductor parts with stringent requirements.</p>
+        <div class="cap-bar"></div>
+      </div>
+      <div class="cap-card reveal">
+        <span class="cap-n">06</span>
+        <div class="cap-ico" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M3.5 5h12M3.5 9.5h12M3.5 14h7"/><circle cx="15" cy="14" r="2.5"/></svg>
+        </div>
+        <div class="cap-ttl">Plastics &amp; Metals</div>
+        <p class="cap-dsc">Full material range: aluminum alloys, stainless, titanium, Inconel, brass, PEEK, Delrin, PTFE, polycarbonate, and custom alloy specifications.</p>
+        <div class="cap-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ INDUSTRIES ════════ -->
+<section id="ind" aria-labelledby="ind-h2">
+  <div class="wrap">
+    <div class="ind-hdr reveal">
+      <span class="eyebrow">Markets We Serve</span>
+      <h2 class="section-title" id="ind-h2" style="margin-top:14px">Industries<br>We Serve</h2>
+      <p class="ind-sub" style="margin-top:14px">Mission-critical manufacturing for the most demanding sectors worldwide — where tolerance failures are not an option.</p>
+    </div>
+    <div class="ind-grid">
+      <div class="ind-card reveal">
+        <img src="images/aerospace.jpg" alt="Aerospace and Defense — precision machined components for flight-critical and defense applications" loading="lazy">
+        <div class="ind-ov" aria-hidden="true"></div>
+        <div class="ind-lbl"><span class="ind-name">Aerospace &amp; Defense</span><span class="ind-bar"></span></div>
+      </div>
+      <div class="ind-card reveal">
+        <img src="images/automotive.jpg" alt="Automotive — precision machined parts for automotive engineering and motorsport" loading="lazy">
+        <div class="ind-ov" aria-hidden="true"></div>
+        <div class="ind-lbl"><span class="ind-name">Automotive</span><span class="ind-bar"></span></div>
+      </div>
+      <div class="ind-card reveal">
+        <img src="images/linear-accelerator.jpg" alt="Linear Accelerators — precision machined components for particle accelerator systems" loading="lazy">
+        <div class="ind-ov" aria-hidden="true"></div>
+        <div class="ind-lbl"><span class="ind-name">Linear Accelerators</span><span class="ind-bar"></span></div>
+      </div>
+      <div class="ind-card reveal">
+        <img src="images/medical-device.jpg" alt="Medical Device — close-tolerance machined parts for surgical and diagnostic equipment" loading="lazy">
+        <div class="ind-ov" aria-hidden="true"></div>
+        <div class="ind-lbl"><span class="ind-name">Medical Device</span><span class="ind-bar"></span></div>
+      </div>
+      <div class="ind-card reveal">
+        <img src="images/oil-gas.jpg" alt="Oil and Gas — precision machined components for extraction and processing equipment" loading="lazy">
+        <div class="ind-ov" aria-hidden="true"></div>
+        <div class="ind-lbl"><span class="ind-name">Oil &amp; Gas</span><span class="ind-bar"></span></div>
+      </div>
+      <div class="ind-card reveal">
+        <img src="images/pharmaceutical.jpg" alt="Pharmaceutical — precision machined parts for pharmaceutical manufacturing equipment" loading="lazy">
+        <div class="ind-ov" aria-hidden="true"></div>
+        <div class="ind-lbl"><span class="ind-name">Pharmaceutical</span><span class="ind-bar"></span></div>
+      </div>
+      <div class="ind-card reveal">
+        <img src="images/robotics.jpg" alt="Robotics — precision machined structural and mechanical components for robotics systems" loading="lazy">
+        <div class="ind-ov" aria-hidden="true"></div>
+        <div class="ind-lbl"><span class="ind-name">Robotics</span><span class="ind-bar"></span></div>
+      </div>
+      <div class="ind-card reveal">
+        <img src="images/semiconductor.jpg" alt="Semiconductor — ultra-precise machined parts for semiconductor fabrication equipment" loading="lazy">
+        <div class="ind-ov" aria-hidden="true"></div>
+        <div class="ind-lbl"><span class="ind-name">Semiconductor</span><span class="ind-bar"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ QUALITY ════════ -->
+<section id="qual" aria-labelledby="qual-h2">
+  <div class="wrap">
+    <div class="qual-grid">
+      <div class="qual-content reveal">
+        <span class="eyebrow">Quality Assurance</span>
+        <h2 class="section-title" id="qual-h2" style="margin-top:18px">Traceable.<br>Verified.<br>Certified.</h2>
+        <p class="qual-lead" style="margin-top:22px">Our Quality Department operates to the standards demanded by aerospace, medical, and semiconductor supply chains. Every part leaves with full documentation — not just a part number.</p>
+        <ul class="qual-list" aria-label="Quality capabilities">
+          <li class="qual-item"><span class="qual-dot" aria-hidden="true"></span><span class="qual-txt">Full Service Inspection</span></li>
+          <li class="qual-item"><span class="qual-dot" aria-hidden="true"></span><span class="qual-txt">CMM Printouts &amp; Dimensional Reports</span></li>
+          <li class="qual-item"><span class="qual-dot" aria-hidden="true"></span><span class="qual-txt">Detailed Inspection Reports</span></li>
+          <li class="qual-item"><span class="qual-dot" aria-hidden="true"></span><span class="qual-txt">Full Material Traceability</span></li>
+          <li class="qual-item"><span class="qual-dot" aria-hidden="true"></span><span class="qual-txt">Conformance Certificates</span></li>
+          <li class="qual-item"><span class="qual-dot" aria-hidden="true"></span><span class="qual-txt">Temperature-Controlled Inspection Department</span></li>
+          <li class="qual-item"><span class="qual-dot" aria-hidden="true"></span><span class="qual-txt">Calibrated Inspection Equipment</span></li>
+        </ul>
+      </div>
+      <div class="qual-vis reveal">
+        <div class="qual-img-wrap">
+          <img src="images/quality.jpeg" alt="Expedite Precision Works quality inspection — CMM measurement, calibrated equipment, and dimensional verification" loading="lazy">
+          <div class="qual-badge" aria-hidden="true">
+            <div class="qual-badge-h"><span>Quality Commitment</span>Highest-Grade<br>Workmanship</div>
+            <div class="qual-cmm">CMM<br>Verified<br><span style="color:var(--accent)">■</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TESTIMONIALS ════════ -->
+<section id="testi" aria-labelledby="testi-h2">
+  <div class="wrap">
+    <div class="testi-hdr reveal">
+      <span class="eyebrow">Client Feedback</span>
+      <h2 class="section-title" id="testi-h2" style="margin-top:14px">Trusted by<br>Engineers</h2>
+    </div>
+    <!-- Add testimonials by duplicating a .testi-card block -->
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <span class="testi-q" aria-hidden="true">"</span>
+        <blockquote class="testi-txt">"A highly reliable shop that keeps its commitments when delivery dates are important, while providing quality service above and beyond expectations."</blockquote>
+        <footer class="testi-auth"><cite class="testi-role">Staff Engineer<br>Medical Device Company</cite></footer>
+      </div>
+      <div class="testi-card reveal">
+        <span class="testi-q" aria-hidden="true">"</span>
+        <blockquote class="testi-txt">"One of the most skilled and talented groups of machinists you'll ever find — they excel at challenging components. Founder Orlando Teixeira has an uncanny ability to find a way to manufacture a part that most shops wouldn't even attempt."</blockquote>
+        <footer class="testi-auth"><cite class="testi-role">Staff Engineer<br>Medical Device Company</cite></footer>
+      </div>
+      <div class="testi-card reveal">
+        <span class="testi-q" aria-hidden="true">"</span>
+        <blockquote class="testi-txt">"One of our go-to shops, especially for high-tolerance prototype parts. Wide range of machining capabilities, excellent quality, and close enough to meet in person when needed. Highly recommend."</blockquote>
+        <footer class="testi-auth"><cite class="testi-role">Research Engineer<br>Aerospace &amp; Defense Company</cite></footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT ════════ -->
+<section id="contact" aria-labelledby="contact-h2">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-l reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2 class="section-title" id="contact-h2" style="margin-top:18px">Request<br>a Quote</h2>
+        <p class="contact-lead" style="margin-top:22px">Send us your prints, specs, and requirements. We respond promptly with a competitive quote and realistic delivery schedule — no runaround.</p>
+        <ul class="contact-deets" aria-label="Contact information">
+          <li class="cd">
+            <div class="cd-ico" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1C5.24 1 3 3.24 3 6c0 4 5 9 5 9s5-5 5-9c0-2.76-2.24-5-5-5z"/><circle cx="8" cy="6" r="1.5"/></svg>
+            </div>
+            <div>
+              <div class="cd-lbl">Address</div>
+              <div class="cd-val"><a href="https://maps.google.com/?q=931+Berryessa+Road+San+Jose+CA+95133" target="_blank" rel="noopener noreferrer">931 Berryessa Road<br>San Jose, CA 95133</a></div>
+            </div>
+          </li>
+          <li class="cd">
+            <div class="cd-ico" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h3l1.5 3.5-2 1.2a10 10 0 004.8 4.8l1.2-2L14 12v3c0 .55-.45 1-1 1A12 12 0 012 3z"/></svg>
+            </div>
+            <div>
+              <div class="cd-lbl">Phone</div>
+              <div class="cd-val"><a href="tel:+14085739600">(408) 573-9600</a></div>
+            </div>
+          </li>
+          <li class="cd">
+            <div class="cd-ico" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="1"/><path d="M1 4l7 5 7-5"/></svg>
+            </div>
+            <div>
+              <div class="cd-lbl">Email</div>
+              <div class="cd-val"><a href="mailto:info@expediteprecision.com">info@expediteprecision.com</a></div>
+            </div>
+          </li>
+        </ul>
+        <div class="socials" aria-label="Social media links">
+          <a href="https://www.facebook.com/expediteprecision" target="_blank" rel="noopener noreferrer" class="soc" aria-label="Expedite Precision Works on Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/expedite-precision-works" target="_blank" rel="noopener noreferrer" class="soc" aria-label="Expedite Precision Works on LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="qform reveal">
+        <div class="form-h">Start Your Quote</div>
+        <p class="form-s">Provide details — we'll follow up promptly.</p>
+        <form action="#" method="post" novalidate aria-label="Request a quote form">
+          <div class="form-row">
+            <div class="fg">
+              <label class="fl" for="fn">Full Name *</label>
+              <input class="fi" type="text" id="fn" name="name" placeholder="Jane Smith" required autocomplete="name">
+            </div>
+            <div class="fg">
+              <label class="fl" for="fc">Company</label>
+              <input class="fi" type="text" id="fc" name="company" placeholder="Acme Corp" autocomplete="organization">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="fg">
+              <label class="fl" for="fe">Email *</label>
+              <input class="fi" type="email" id="fe" name="email" placeholder="jane@company.com" required autocomplete="email">
+            </div>
+            <div class="fg">
+              <label class="fl" for="fp">Phone</label>
+              <input class="fi" type="tel" id="fp" name="phone" placeholder="(555) 555-0100" autocomplete="tel">
+            </div>
+          </div>
+          <div class="fg">
+            <label class="fl" for="fi">Industry</label>
+            <div class="sel-wrap">
+              <select class="fs" id="fi" name="industry">
+                <option value="">Select industry…</option>
+                <option value="aerospace">Aerospace &amp; Defense</option>
+                <option value="automotive">Automotive</option>
+                <option value="linear-accelerator">Linear Accelerators</option>
+                <option value="medical-device">Medical Device</option>
+                <option value="oil-gas">Oil &amp; Gas</option>
+                <option value="pharmaceutical">Pharmaceutical</option>
+                <option value="robotics">Robotics</option>
+                <option value="semiconductor">Semiconductor</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg">
+            <label class="fl" for="fm">Project Details *</label>
+            <textarea class="fta" id="fm" name="message" placeholder="Describe your parts, material, quantity, tolerances, and any print references…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Submit Quote Request
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer id="ftr" role="contentinfo">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <div class="ftr-logo">
+          <img src="images/logo-white.png" alt="Expedite Precision Works" width="160" height="32" loading="lazy">
+        </div>
+        <p class="ftr-tag">Family-owned precision CNC machine shop. Prototype to high-volume close-tolerance parts for mission-critical industries worldwide.</p>
+        <div class="ftr-since">Since 1994</div>
+      </div>
+      <div>
+        <div class="ftr-col-ttl">Navigation</div>
+        <ul class="ftr-links">
+          <li><a href="#cap">Capabilities</a></li>
+          <li><a href="#qual">Quality</a></li>
+          <li><a href="#ind">Industries</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Request a Quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ftr-col-ttl">Contact</div>
+        <div class="ftr-cl">931 Berryessa Road<br>San Jose, CA 95133</div>
+        <div class="ftr-cl"><a href="tel:+14085739600">(408) 573-9600</a></div>
+        <div class="ftr-cl"><a href="mailto:info@expediteprecision.com">info@expediteprecision.com</a></div>
+        <div class="socials" style="margin-top:14px" aria-label="Social media">
+          <a href="https://www.facebook.com/expediteprecision" target="_blank" rel="noopener noreferrer" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://www.linkedin.com/company/expedite-precision-works" target="_blank" rel="noopener noreferrer" class="soc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="ftr-bot">
+      <div class="ftr-copy">&copy; <span id="yr"></span> Expedite Precision Works, Inc. All rights reserved.</div>
+      <div class="ftr-bot-links">
+        <a href="mailto:info@expediteprecision.com">info@expediteprecision.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+// Year
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Scroll progress + header state
+const progFill = document.getElementById('prog-fill');
+const progTrack = document.getElementById('prog-track');
+const hdr = document.getElementById('hdr');
+function onScroll() {
+  const s = window.scrollY;
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = max > 0 ? (s / max) * 100 : 0;
+  progFill.style.width = pct + '%';
+  progTrack.setAttribute('aria-valuenow', Math.round(pct));
+  hdr.classList.toggle('scrolled', s > 20);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// Mobile nav
+const navTog = document.getElementById('navTog');
+const hdrNav = document.getElementById('hdrNav');
+navTog.addEventListener('click', () => {
+  const open = hdrNav.classList.toggle('open');
+  navTog.setAttribute('aria-expanded', open);
+});
+hdrNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hdrNav.classList.remove('open');
+    navTog.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// Scroll reveal
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// Stagger grid children
+['.ind-grid .reveal', '.cap-grid .reveal', '.testi-grid .reveal'].forEach(sel => {
+  document.querySelectorAll(sel).forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 85 + 'ms';
+  });
+});
+</script>
+</body>
+</html>
