@@ -208,18 +208,55 @@ ul{list-style:none}
   clip-path: polygon(14% 0, 100% 0, 100% 100%, 0% 100%);
   overflow: hidden;
 }
-.hero-photo-side img {
+.slide-img {
+  position: absolute;
+  inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center;
   filter: brightness(.62) saturate(.75);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  transform: scale(1.06);
+}
+.slide-img.active {
+  opacity: 1;
+  animation: kenburns 7s ease-in-out forwards;
+}
+@keyframes kenburns {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.0); }
+}
+.slide-dots {
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  z-index: 2;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.slide-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+  border: none;
+  padding: 0;
+}
+.slide-dot.active {
+  background: var(--cu);
+  transform: scale(1.3);
 }
 .hero-photo-side::after {
   content:'';
   position:absolute;
   inset:0;
+  z-index: 1;
   background: linear-gradient(to right, rgba(246,244,239,.3) 0%, transparent 30%),
               linear-gradient(to top, rgba(14,14,11,.5) 0%, transparent 40%);
+  pointer-events: none;
 }
 .hero-statbar {
   position: absolute;
@@ -819,7 +856,16 @@ ul{list-style:none}
 <section id="hero" aria-labelledby="hero-h1">
 
   <div class="hero-photo-side" aria-hidden="true">
-    <img src="images/hero-photo.jpg" alt="" loading="eager" fetchpriority="high">
+    <img src="images/hero-photo.jpg"        alt="" loading="eager" fetchpriority="high" class="slide-img active">
+    <img src="images/aerospace.jpg"         alt="" loading="lazy" class="slide-img">
+    <img src="images/quality.jpeg"          alt="" loading="lazy" class="slide-img">
+    <img src="images/about.jpeg"            alt="" loading="lazy" class="slide-img">
+    <div class="slide-dots" role="tablist" aria-label="Slideshow navigation">
+      <button class="slide-dot active" aria-label="Slide 1" aria-selected="true"></button>
+      <button class="slide-dot" aria-label="Slide 2" aria-selected="false"></button>
+      <button class="slide-dot" aria-label="Slide 3" aria-selected="false"></button>
+      <button class="slide-dot" aria-label="Slide 4" aria-selected="false"></button>
+    </div>
   </div>
 
   <div class="hero-left">
@@ -1219,6 +1265,36 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
     el.style.transitionDelay = (i % 4) * 80 + 'ms';
   });
 });
+
+// Hero slideshow
+const slideImgs = document.querySelectorAll('.slide-img');
+const slideDots = document.querySelectorAll('.slide-dot');
+let slideIdx = 0;
+let slideTimer;
+
+function goToSlide(n) {
+  slideImgs[slideIdx].classList.remove('active');
+  slideDots[slideIdx].classList.remove('active');
+  slideDots[slideIdx].setAttribute('aria-selected', 'false');
+  slideIdx = (n + slideImgs.length) % slideImgs.length;
+  slideImgs[slideIdx].classList.add('active');
+  slideDots[slideIdx].classList.add('active');
+  slideDots[slideIdx].setAttribute('aria-selected', 'true');
+}
+
+function startSlider() {
+  slideTimer = setInterval(() => goToSlide(slideIdx + 1), 5000);
+}
+
+slideDots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    clearInterval(slideTimer);
+    goToSlide(i);
+    startSlider();
+  });
+});
+
+startSlider();
 </script>
 </body>
 </html>
